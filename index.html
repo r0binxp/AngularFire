@@ -1,99 +1,49 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Prueba de Firebase Connect</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<head>
+  <meta charset="utf-8">
+  <title>Prueba de Firebase Connect</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="modules/toArrayFilter.js" charset="utf-8"></script>
-  </head>
-  <body ng-controller="myCtrl">
-    <div class="col-md-3 col-xs-2">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    </div>
-    <div class="col-md-6 col-xs-8">
-      <div class="bg-info">
-        <h1>Prueba de Conexion a Firebase</h1>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-      </div>
-      <form role="form" method="post">
-        <div class="formGroup">
-          <label for="nombreId">Nombre</label>
-          <input class="form-control" type="text" id="nombreId" ng-model="usuario.nombre" name="nombre" value="Nombre?">
-        </div>
-        <div class="formGroup">
-          <label  for="apellidoId">Apellido</label>
-          <input class="form-control" type="text" id="apellidoId" ng-model="usuario.apellido" name="apellido" value="Apellido?">
-        </div>
-        <div class="formGroup">
-          <label for="telefonoId">Telefono</label>
-          <input class="form-control" type="phone" id="telefonoId" ng-model="usuario.telefono" name="telefono" value="Telefono?">
-        </div>
-        <div class="formGroup">
-          <button ng-click="enviar()" name="Enviar" class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span>Añadir</button>
-          <button ng-show="actualizarbtn" ng-click="actualizar(key)" name="Actualizar" class="btn btn-info" ><span class="glyphicon glyphicon-pencil"></span>Actualizar</button>
-        </div>
-      </form>
-  <div class="col-ms-12">
-    <div class="form-group">
-      <label>Buscar Contacto: <input class="form-control" ng-model="search"></label>
-    </div>
+</head>
 
-  </div>
-  <div class="col-md-12">
-        <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th ng-click="ordenListaCambio('nombre')">Nombre</th>
-                <th ng-click="ordenListaCambio('apellido')" >Apellido</th>
-                <th ng-click="ordenListaCambio('telefono')" >Telefono</th>
-              </tr>
-            </thead>
-  <div class="col-md-12 col-xs-12">
+<body>
+  <ng-include src="'src/templates/main.html'"></ng-include>
 
-        <tbody>
+  <!-- thirdparty modules  -->
+  <script src="modules/toArrayFilter.js" charset="utf-8"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC2uMBVhYrbZxoRcR84gtSJfwzA65_KjYk",
+      authDomain: "prueba-d6e63.firebaseapp.com",
+      databaseURL: "https://prueba-d6e63.firebaseio.com",
+      projectId: "prueba-d6e63",
+      storageBucket: "prueba-d6e63.appspot.com",
+      messagingSenderId: "502083122385"
+    };
+    firebase.initializeApp(config);
+  </script>
 
-          <tr ng-repeat="(key, dato) in datos| toArray | filter:search | limitTo:'20' | orderBy:ordenLista:reverse">
-            <th scope="row"></th>
-            <td>{{dato.nombre}}</td>
-            <td>{{dato.apellido}}</td>
-            <td>{{dato.telefono}}</td>
-            <td><span ng-click="editar(key,dato)" class="btn btn-info">Edit</span></td>
-            <td><span ng-click="borrar(key)" class="btn btn-danger">remove</span></td>
-          </tr>
-        </tbody>
-      </table>
-  </div>
+  <!-- Our own scripts -->
 
+  <!-- Main Module -->
+  <script src="src/index.js" charset="utf-8"></script>
 
-    <div class="col-md-3 col-xs-2">
+  <!-- Controllers -->
+  <script src="src/controllers/main.js" charset="utf-8"></script>
 
-    </div>
+</body>
 
-
-<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyC2uMBVhYrbZxoRcR84gtSJfwzA65_KjYk",
-    authDomain: "prueba-d6e63.firebaseapp.com",
-    databaseURL: "https://prueba-d6e63.firebaseio.com",
-    projectId: "prueba-d6e63",
-    storageBucket: "prueba-d6e63.appspot.com",
-    messagingSenderId: "502083122385"
-  };
-  firebase.initializeApp(config);
-</script>
-<script src="index.js" charset="utf-8"></script>
-
-  </body>
 </html>

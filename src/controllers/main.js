@@ -1,10 +1,12 @@
-var app = angular.module('myApp',['angular-toArrayFilter']);
-var db = firebase.database();
-var data = {};
-var key;
-var $inputNombre = document.getElementById('nombreId');
+/* Buscamos el modulo myApp */
+var app = angular.module('myApp');
 
 app.controller('myCtrl', function($scope) {
+    var db = firebase.database();
+    var data = {};
+    var key;
+    var $inputNombre = document.getElementById('nombreId');
+
     $scope.ordenLista = "nombre";
     $scope.llaveupdate = "";
     $scope.actualizarbtn = false;
