@@ -1,0 +1,59 @@
+<div ng-controller="myCtrl">
+  <div class="col-md-3 col-xs-2">
+
+  </div>
+  <div class="col-md-6 col-xs-8">
+    <div class="bg-info">
+      <h1>Prueba de Conexion a Firebase</h1>
+
+    </div>
+    <form role="form" method="post">
+      <div class="formGroup">
+        <label for="nombreId">Nombre</label>
+        <input class="form-control" type="text" id="nombreId" ng-model="usuario.nombre" name="nombre" value="Nombre?">
+      </div>
+      <div class="formGroup">
+        <label for="apellidoId">Apellido</label>
+        <input class="form-control" type="text" id="apellidoId" ng-model="usuario.apellido" name="apellido" value="Apellido?">
+      </div>
+      <div class="formGroup">
+        <label for="telefonoId">Telefono</label>
+        <input class="form-control" type="phone" id="telefonoId" ng-model="usuario.telefono" name="telefono" value="Telefono?">
+      </div>
+      <div class="formGroup">
+        <button ng-click="enviar()" name="Enviar" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Añadir</button>
+        <button ng-show="actualizarbtn" ng-click="actualizar(key)" name="Actualizar" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>Actualizar</button>
+      </div>
+    </form>
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th ng-click="ordenListaCambio('nombre')">Nombre</th>
+            <th ng-click="ordenListaCambio('apellido')">Apellido</th>
+            <th ng-click="ordenListaCambio('telefono')">Telefono</th>
+          </tr>
+        </thead>
+        <tbody ng-p>
+          <label>Search: <input ng-model="search"></label>
+          <tr ng-repeat="(key, dato) in datos| toArray | filter:search | limitTo:'5' | orderBy:ordenLista:reverse">
+            <th scope="row"></th>
+            <td>{{dato.nombre}}</td>
+            <td>{{dato.apellido}}</td>
+            <td>{{dato.telefono}}</td>
+            <td><span ng-click="editar(key,dato)" class="btn btn-info">Edit</span></td>
+            <td><span ng-click="borrar(key)" class="btn btn-danger">remove</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+
+  </div>
+  <div class="col-md-3 col-xs-2">
+
+  </div>
+</div>
