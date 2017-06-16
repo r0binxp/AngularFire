@@ -42,34 +42,39 @@
           <button ng-show="actualizarbtn" ng-click="actualizar(key)" name="Actualizar" class="btn btn-info" ><span class="glyphicon glyphicon-pencil"></span>Actualizar</button>
         </div>
       </form>
-      <div class="col-md-12">
-        <table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th ng-click="ordenListaCambio('nombre')">Nombre</th>
-      <th ng-click="ordenListaCambio('apellido')" >Apellido</th>
-      <th ng-click="ordenListaCambio('telefono')" >Telefono</th>
-    </tr>
-  </thead>
-  <tbody ng-p>
-    <label>Search: <input ng-model="search"></label>
-    <tr ng-repeat="(key, dato) in datos| toArray | filter:search | limitTo:'5' | orderBy:ordenLista:reverse">
-      <th scope="row"></th>
-      <td>{{dato.nombre}}</td>
-      <td>{{dato.apellido}}</td>
-      <td>{{dato.telefono}}</td>
-      <td><span ng-click="editar(key,dato)" class="btn btn-info">Edit</span></td>
-      <td><span ng-click="borrar(key)" class="btn btn-danger">remove</span></td>
-    </tr>
-  
-  </tbody>
-</table>
-
-      </div>
-
-
+  <div class="col-ms-12">
+    <div class="form-group">
+      <label>Buscar Contacto: <input class="form-control" ng-model="search"></label>
     </div>
+
+  </div>
+  <div class="col-md-12">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th ng-click="ordenListaCambio('nombre')">Nombre</th>
+                <th ng-click="ordenListaCambio('apellido')" >Apellido</th>
+                <th ng-click="ordenListaCambio('telefono')" >Telefono</th>
+              </tr>
+            </thead>
+  <div class="col-md-12 col-xs-12">
+
+        <tbody>
+
+          <tr ng-repeat="(key, dato) in datos| toArray | filter:search | limitTo:'20' | orderBy:ordenLista:reverse">
+            <th scope="row"></th>
+            <td>{{dato.nombre}}</td>
+            <td>{{dato.apellido}}</td>
+            <td>{{dato.telefono}}</td>
+            <td><span ng-click="editar(key,dato)" class="btn btn-info">Edit</span></td>
+            <td><span ng-click="borrar(key)" class="btn btn-danger">remove</span></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+
     <div class="col-md-3 col-xs-2">
 
     </div>
