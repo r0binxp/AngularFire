@@ -8,7 +8,6 @@ app.controller('Agenda', function($scope) {
     var $inputNombre = document.getElementById('nombreId');
 
     $scope.ordenLista = "nombre";
-    $scope.llaveupdate = "";
     $scope.actualizarbtn = false;
     $scope.reverse = true;
     $scope.usuario = {
@@ -31,35 +30,36 @@ app.controller('Agenda', function($scope) {
 
     }
 
-     db.ref('usuario').on('value',function(snapshot){
-     data = snapshot.val();
-     $scope.datos = data;
-     console.log(data);
-     $scope.$digest();
+    db.ref('usuario').on('value',function(snapshot){
+      data = snapshot.val();
+      $scope.datos = data;
+      console.log(data);
+     $scope.$apply();
     })
 
     $scope.borrar = function(key){
       console.log(key);
-      //var llave = key;
-    //db.ref('usuario').child(key).remove();
+      db.ref('usuario').child(key).remove();
     }
     $scope.editar = function(key, dato){
       $scope.key = key;
       console.log(dato);
+      console.log(key);
       $scope.usuario = {
+        key: dato.$key,
         nombre: dato.nombre,
         apellido: dato.apellido,
         telefono: dato.telefono,
+
       }
       $scope.actualizarbtn=true;
       //console.log(key);
-      $scope.llaveupdate = key;
     }
     $scope.actualizar = function(key){
       console.log("ESTA ES LA LLAVE +" + key);
       db.ref('usuario').child(key).update($scope.usuario);
       $scope.actualizarbtn=false;
-      //borradatos();
+      borradatos();
      }
 
    $scope.ordenListaCambio = function(orden){
