@@ -1,4 +1,4 @@
-<div class="container" ng-controller="myCtrl">
+<div class="container" ng-controller="Agenda">
 
   <div class="row">
     <div class="col-md-10 col-xs-8">
@@ -21,7 +21,7 @@
           <input class="form-control" type="phone" id="telefonoId" ng-model="usuario.telefono" name="telefono" value="Telefono?">
         </div>
         <div class="formGroup">
-          <button ng-click="enviar()" name="Enviar" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Añadir</button>
+          <button ng-show="!actualizarbtn" ng-click="enviar()" name="Enviar" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Añadir</button>
           <button ng-show="actualizarbtn" ng-click="actualizar(key)" name="Actualizar" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>Actualizar</button>
         </div>
       </form>
@@ -51,13 +51,14 @@
           </thead>
           <tbody>
 
-            <tr ng-repeat="(key, dato) in datos| toArray | filter:search | limitTo:cantidadDeItems | orderBy:ordenLista:reverse">
+            <tr ng-repeat="dato in datos| toArray | filter:search | limitTo:cantidadDeItems | orderBy:ordenLista:reverse">
               <th scope="row"></th>
               <td>{{dato.nombre}}</td>
               <td>{{dato.apellido}}</td>
               <td>{{dato.telefono}}</td>
-              <td><span ng-click="editar(key,dato)" class="btn btn-info">Edit</span></td>
-              <td><span ng-click="borrar(key)" class="btn btn-danger">remove</span></td>
+              <td>{{dato.$key}}</td>
+              <td><span ng-click="editar(key, dato)" class="btn btn-info">Edit</span></td>
+              <td><span ng-click="borrar(dato.$key)" class="btn btn-danger">remove</span></td>
             </tr>
 
           </tbody>

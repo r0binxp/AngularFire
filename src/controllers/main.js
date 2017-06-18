@@ -1,7 +1,7 @@
 /* Buscamos el modulo myApp */
-var app = angular.module('myApp');
+var app = angular.module('Aplicacion');
 
-app.controller('myCtrl', function($scope) {
+app.controller('Agenda', function($scope) {
     var db = firebase.database();
     var data = {};
     var key;
@@ -40,10 +40,10 @@ app.controller('myCtrl', function($scope) {
 
     $scope.borrar = function(key){
       console.log(key);
-      var llave = key;
-    db.ref('usuario').child(llave).remove();
+      //var llave = key;
+    //db.ref('usuario').child(key).remove();
     }
-    $scope.editar = function(key,dato){
+    $scope.editar = function(key, dato){
       $scope.key = key;
       console.log(dato);
       $scope.usuario = {
@@ -52,14 +52,14 @@ app.controller('myCtrl', function($scope) {
         telefono: dato.telefono,
       }
       $scope.actualizarbtn=true;
-      console.log(key);
+      //console.log(key);
       $scope.llaveupdate = key;
     }
     $scope.actualizar = function(key){
       console.log("ESTA ES LA LLAVE +" + key);
       db.ref('usuario').child(key).update($scope.usuario);
       $scope.actualizarbtn=false;
-      borradatos();
+      //borradatos();
      }
 
    $scope.ordenListaCambio = function(orden){
